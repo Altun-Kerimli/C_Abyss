@@ -1,6 +1,6 @@
 {
-  "name": "ceyla_website",
-  "version": "0.1.0",
+  "name": "c-abyss",
+  "version": "0.1.1",
   "private": true,
   "scripts": {
     "dev": "next dev",
