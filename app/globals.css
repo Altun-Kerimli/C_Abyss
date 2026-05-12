@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import "tailwindcss"; 
+
+@layer base {
+  body {
+    @apply bg-black text-white antialiased;
+  }
+}
+
+@layer components {
+  /* Reusable standard container centering and padding */
+  .page-container {
+    @apply min-h-screen max-w-6xl mx-auto px-4 py-12 md:py-20 flex flex-col space-y-24;
+  }
+  
+  /* Standardized image wrappers */
+  .img-wrapper-square {
+    @apply relative block aspect-square w-full overflow-hidden rounded-lg border border-gray-800 bg-gray-900;
+  }
+}
+
+
