@@ -1,7 +1,18 @@
 import { logout } from '@/app/lib/actions';
-import Link from 'next/link'; // ADD THIS LINE
+import Link from 'next/link';
+import { auth } from '@/auth'; // Adjust this path if your auth.ts is somewhere else
+import { redirect } from 'next/navigation';
 
-export default function AdminDashboard() {
+export default async function AdminDashboard() {
+  // 1. The Bouncer: Check if a valid session exists
+  const session = await auth();
+
+  // 2. The Kick: If no session, send them back to the homepage (or login page)
+  if (!session) {
+    redirect('/'); 
+  }
+
+  // 3. The VIP Section: Only renders if session exists
   return (
     <div className="page-container">
       <div className="flex justify-between items-center mb-8 border-b border-gray-800 pb-4">
