@@ -42,20 +42,32 @@ export default async function Home() {
       {/* 1. DYNAMIC HERO */}
       {heroAlbum ? (
         <section className="flex flex-col items-center text-center pt-5">
-          <p className={`font-bold tracking-[0.3em] uppercase mb-6 ${isUpcoming ? 'text-violet-500' : 'text-blue-400 animate-pulse'}`}>
+          <p className={`font-bold tracking-[0.3em] uppercase mb-6 md:mb-8 ${isUpcoming ? 'text-violet-500' : 'text-blue-400 animate-pulse'}`}>
             {isUpcoming ? 'Incoming Transmission' : 'Out Now'}
           </p>
           
-          <h1 className="text-4xl md:text-6xl font-black text-white mb-8 uppercase tracking-wide">
-            <Link href={`/albums/${heroAlbum.id}`} className="hover:text-violet-400 transition-colors">
-              {heroAlbum.title}
-            </Link>
+          <h1 className="text-4xl md:text-6xl font-black text-white mb-6 md:mb-8 uppercase tracking-wide">
+            {/* CONDITION 1: Title Link */}
+            {isUpcoming ? (
+              <span className="cursor-default text-gray-200">{heroAlbum.title}</span>
+            ) : (
+              <Link href={`/albums/${heroAlbum.id}`} className="hover:text-violet-400 transition-colors">
+                {heroAlbum.title}
+              </Link>
+            )}
           </h1>
           
+          {/* CONDITION 2: Cover Image Link */}
           {heroAlbum.cover_url && (
-            <Link href={`/albums/${heroAlbum.id}`} className={`mb-8 rounded-lg overflow-hidden border transition-all duration-500 block ${isUpcoming ? 'shadow-2xl shadow-violet-900/20 border-gray-800' : 'shadow-[0_0_40px_rgba(96,165,250,0.3)] border-blue-500/50 hover:scale-105'}`}>
-              <Image src={heroAlbum.cover_url} alt={heroAlbum.title} width={256} height={256} className="object-cover w-48 h-48 md:w-64 md:h-64 block" unoptimized priority />
-            </Link>
+            isUpcoming ? (
+              <div className="mb-8 rounded-lg overflow-hidden border border-gray-800 shadow-2xl shadow-violet-900/20 block cursor-default">
+                <Image src={heroAlbum.cover_url} alt={heroAlbum.title} width={256} height={256} className="object-cover w-48 h-48 md:w-64 md:h-64 block opacity-80" unoptimized priority />
+              </div>
+            ) : (
+              <Link href={`/albums/${heroAlbum.id}`} className="mb-8 rounded-lg overflow-hidden border border-blue-500/50 shadow-[0_0_40px_rgba(96,165,250,0.3)] hover:scale-105 transition-all duration-500 block">
+                <Image src={heroAlbum.cover_url} alt={heroAlbum.title} width={256} height={256} className="object-cover w-48 h-48 md:w-64 md:h-64 block" unoptimized priority />
+              </Link>
+            )
           )}
 
           {isUpcoming && (
@@ -66,7 +78,7 @@ export default async function Home() {
         </section>
       ) : (
         <section className="flex flex-col justify-center items-center h-[30vh] border border-gray-800 border-dashed rounded-xl bg-gray-900/20 mt-10">
-           <h1 className="text-2xl text-gray-400 font-bold tracking-widest uppercase text-center leading-relaxed">No upcoming releases yet.<br/>Stay put!</h1>
+           <h1 className="text-xl md:text-2xl text-gray-400 font-bold tracking-widest uppercase text-center leading-relaxed">No upcoming releases yet.<br/>Stay put!</h1>
         </section>
       )}
 
@@ -106,18 +118,21 @@ export default async function Home() {
       {/* 3. DISCOGRAPHY PREVIEW */}
       {gridAlbums.length > 0 && (
         <section>
-          <div className="flex justify-between items-end mb-8 border-b border-gray-800 pb-4">
-            <h2 className="text-2xl font-bold text-white uppercase tracking-widest">Recent Waves</h2>
-            <Link href="/albums" className="text-sm text-violet-400 hover:text-violet-300 uppercase tracking-widest">Discography &rarr;</Link>
+          <div className="flex justify-between items-end mb-6 md:mb-8 border-b border-gray-800 pb-4">
+            <h2 className="text-xl md:text-2xl font-bold text-white uppercase tracking-widest">Recent Waves</h2>
+            <Link href="/albums" className="text-xs md:text-sm text-violet-400 hover:text-violet-300 uppercase tracking-widest">Discography &rarr;</Link>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
+          
+          {/* THE FIX: Changed grid-cols-1 to grid-cols-2 for mobile, adjusted gap */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 md:gap-8">
+            
             {gridAlbums.map((album) => (
               <Link href={`/albums/${album.id}`} key={album.id} className="group block">
-                <div className="relative aspect-square mb-4 overflow-hidden rounded-lg">
+                <div className="relative aspect-square mb-2 md:mb-4 overflow-hidden rounded-lg">
                   <Image src={album.cover_url} alt={album.title} fill className="object-cover transition-transform duration-500 group-hover:scale-110" unoptimized />
                 </div>
-                <h3 className="text-lg font-bold text-gray-200 truncate group-hover:text-white">{album.title}</h3>
-                <p className="text-xs text-violet-400 uppercase tracking-widest mt-1">{new Date(album.release_date).getFullYear()}</p>
+                <h3 className="text-base md:text-lg font-bold text-gray-200 truncate group-hover:text-white">{album.title}</h3>
+                <p className="text-[10px] md:text-xs text-violet-400 uppercase tracking-widest mt-1">{new Date(album.release_date).getFullYear()}</p>
               </Link>
             ))}
           </div>

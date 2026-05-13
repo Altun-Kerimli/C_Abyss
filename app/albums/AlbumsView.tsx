@@ -8,11 +8,14 @@ export default function AlbumsView({ heroAlbum, isUpcoming, gridAlbums }: any) {
   const [activeTab, setActiveTab] = useState('releases');
 
   return (
-    <div className="space-y-16 w-full">
+    <div className="space-y-12 w-full">
       
       {/* 1. HERO SECTION (Always on top) */}
       {heroAlbum ? (
         <section className="flex flex-col lg:flex-row gap-8 items-center bg-gray-900/30 p-8 rounded-xl border border-gray-800">
+          <h2 className="text-3xl md:text-5xl font-black text-white mb-6 uppercase tracking-wide">
+            <Link href={`/albums/${heroAlbum.id}`} className="hover:text-violet-400 transition-colors">{heroAlbum.title}</Link>
+          </h2>
           <Link href={`/albums/${heroAlbum.id}`} className={`shrink-0 rounded-lg overflow-hidden border transition-all duration-500 ${isUpcoming ? 'shadow-2xl shadow-violet-900/20 border-gray-800' : 'shadow-[0_0_40px_rgba(96,165,250,0.3)] border-blue-500/50 hover:scale-105'}`}>
             <Image src={heroAlbum.cover_url} alt={heroAlbum.title} width={256} height={256} className="object-cover w-48 h-48 md:w-64 md:h-64 block" unoptimized={true} priority={true} />
           </Link>
@@ -20,9 +23,6 @@ export default function AlbumsView({ heroAlbum, isUpcoming, gridAlbums }: any) {
             <p className={`font-bold tracking-[0.3em] uppercase mb-4 ${isUpcoming ? 'text-violet-500' : 'text-blue-400 animate-pulse'}`}>
               {isUpcoming ? 'Incoming Transmission' : 'Out Now'}
             </p>
-            <h2 className="text-3xl md:text-5xl font-black text-white mb-6 uppercase tracking-wide">
-              <Link href={`/albums/${heroAlbum.id}`} className="hover:text-violet-400 transition-colors">{heroAlbum.title}</Link>
-            </h2>
             {isUpcoming ? (
               <div className="max-w-md mx-auto lg:mx-0">
                 <Countdown targetDate={heroAlbum.release_date} albumId={heroAlbum.id} />

@@ -17,15 +17,18 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.className} min-h-screen flex flex-col`}>
+      {/* ADD overflow-x-hidden to the body to kill the zoom bug */}
+      <body className={`${inter.className} min-h-screen flex flex-col overflow-x-hidden`}>
         
         {/* GLOBAL NAVBAR */}
         <header className="border-b border-gray-800 p-4">
-          <nav className="max-w-6xl mx-auto flex justify-between items-center">
+          {/* Switched to flex-col for mobile, flex-row for desktop */}
+          <nav className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 md:gap-0">
             <Link href="/" className="text-xl font-bold tracking-widest text-blue-400">
               ARTIST LOGO
             </Link>
-            <div className="space-x-6 text-sm">
+            {/* Removed space-x-6, added flex-wrap and gap-4 so links don't push off-screen */}
+            <div className="flex flex-wrap justify-center gap-4 md:gap-6 text-sm">
               <Link href="/announcements" className="hover:text-violet-400">Announcements</Link>
               <Link href="/albums" className="hover:text-violet-400">Albums</Link>
               <Link href="/gallery" className="hover:text-violet-400">Gallery</Link>
