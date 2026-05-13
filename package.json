@@ -1,12 +1,12 @@
 {
-  "name": "c-abyss",
-  "version": "0.1.1",
+  "name": "ceyla_website",
+  "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "eslint"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.105.3",
