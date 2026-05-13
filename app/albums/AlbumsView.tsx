@@ -57,19 +57,20 @@ export default function AlbumsView({ heroAlbum, isUpcoming, gridAlbums }: any) {
 
       {/* 3. TAB CONTENT */}
       {activeTab === 'releases' ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 animate-in fade-in duration-500">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-8 animate-in fade-in duration-500">
           {gridAlbums.map((album: any) => (
             <Link href={`/albums/${album.id}`} key={album.id} className="group block">
-              <div className="img-wrapper-square mb-4">
+              {/* Added relative aspect-square to ensure consistent mobile scaling */}
+              <div className="img-wrapper-square relative aspect-square rounded-lg overflow-hidden mb-2 md:mb-4">
                 {album.cover_url ? (
                   <Image src={album.cover_url} alt={album.title} fill sizes="(max-width: 768px) 100vw, 25vw" className="object-cover transition-transform duration-500 group-hover:scale-110 group-hover:opacity-50" unoptimized={true} />
-                ) : (<div className="flex w-full h-full items-center justify-center text-gray-700 font-bold">NO COVER</div>)}
+                ) : (<div className="flex w-full h-full items-center justify-center text-gray-700 font-bold bg-gray-900">NO COVER</div>)}
                 <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                   <span className="text-white font-bold tracking-widest border border-white px-6 py-2 rounded uppercase bg-black/50 backdrop-blur-sm">Listen</span>
+                   <span className="text-white font-bold tracking-widest border border-white px-4 py-2 md:px-6 md:py-2 text-xs md:text-sm rounded uppercase bg-black/50 backdrop-blur-sm">Listen</span>
                 </div>
               </div>
-              <h3 className="text-xl font-bold text-gray-200 truncate group-hover:text-white transition-colors">{album.title}</h3>
-              <p className="text-sm text-violet-400 mt-1">{new Date(album.release_date).getFullYear()} • {album.song_count} Tracks</p>
+              <h3 className="text-base md:text-xl font-bold text-gray-200 truncate group-hover:text-white transition-colors">{album.title}</h3>
+              <p className="text-[10px] md:text-sm text-violet-400 mt-1">{new Date(album.release_date).getFullYear()} • {album.song_count} Tracks</p>
             </Link>
           ))}
         </div>

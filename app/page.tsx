@@ -166,7 +166,7 @@ export default async function Home() {
             </Link>
           </div>
           
-          <div className="flex flex-wrap justify-center gap-6">
+          <div className="flex flex-wrap justify-center gap-4 mr-4">
             {/* Quick Links with solid branded boxes */}
             <a href="mailto:booking@theabyss.com" className="p-5 bg-violet-600 rounded-2xl text-white shadow-xl shadow-violet-900/40 hover:scale-110 transition-transform">
               <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
